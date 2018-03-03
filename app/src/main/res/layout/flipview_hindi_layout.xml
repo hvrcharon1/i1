@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:app="http://schemas.android.com/tools"
+    android:id="@+id/main_flipView_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:tag="normal">
+
+    <com.yuyakaido.android.cardstackview.CardStackView
+        android:id="@+id/flipView"
+        android:layout_above="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="91dp"
+        android:paddingLeft="41dp"
+        android:paddingRight="41dp"
+        android:paddingTop="163dp"
+        app:elevationEnabled="true"
+        app:scaleDiff="0.05"
+        app:stackFrom="top"
+        app:swipeDirection="freedom_no_bottom"
+        app:swipeEnabled="true"
+        app:swipeThreshold="0.75"
+        app:translationDiff="20"
+        app:visibleCount="3"
+        />
+
+   <!-- <com.aphidmobile.flip.FlipViewController
+        xmlns:flip="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/flipView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        flip:animationBitmapFormat="RGB_565"
+        flip:orientation="horizontal" 
+        android:layout_above="@+id/adView"/>
+-->
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/flipview_gradient_background"
+        android:orientation="horizontal"
+        android:paddingBottom="7.0dip" >
+
+        <ImageView
+            android:id="@+id/language_change"
+            android:layout_width="22.0dip"
+            android:layout_height="26.0dip"
+            android:layout_alignParentLeft="true"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="47.0dip"
+            android:layout_marginTop="8.0dip"
+            android:background="@drawable/online_form"
+            android:contentDescription="@string/app_name" />
+
+        <ImageView
+            android:id="@+id/main_GoToFirst"
+            android:layout_width="22.0dip"
+            android:layout_height="26.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10.0dip"
+            android:layout_marginLeft="10.0dip"
+            android:layout_marginRight="47.0dip"
+            android:layout_marginTop="8.0dip"
+            android:background="@drawable/up_arrow" 
+            android:contentDescription="@string/app_name"/>
+
+        <ImageView
+            android:id="@+id/main_Refresh"
+            android:layout_width="22.0dip"
+            android:layout_height="22.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10.0dip"
+            android:src="@drawable/refresh_icon" 
+            android:contentDescription="@string/app_name"/>
+
+        <ProgressBar
+            android:id="@+id/main_ProgressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="22.0dip"
+            android:layout_height="22.0dip"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10.0dip"
+            android:indeterminateDrawable="@drawable/loading"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutHeader"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/flipview_gradient_background"
+        android:orientation="horizontal"
+        android:paddingRight="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:padding="8dp"
+            android:id="@+id/header" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="@string/category_text"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@android:color/white" />
+
+            <ImageView
+                android:id="@+id/img_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/app_name"
+                android:src="@drawable/setting"
+                android:layout_marginRight="2dp" />
+
+        </RelativeLayout>
+     
+        <!--<GridView
+            android:id="@+id/lsv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/transparentBlack"
+            android:visibility="gone"
+            android:numColumns="2"
+            android:columnWidth="90dp"
+            android:stretchMode="columnWidth"
+            android:cacheColorHint="#000000" />-->
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/header"
+            android:visibility="gone"
+            android:id="@+id/card_recycler_view"
+            android:scrollbars="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+    
+     <com.google.android.gms.ads.AdView android:id="@+id/adView"
+                         android:layout_width="fill_parent"
+                         android:layout_height="wrap_content"
+                         android:layout_gravity="center"
+                         ads:adUnitId="@string/admob_publisher_id"
+                         ads:adSize="SMART_BANNER"
+         android:visibility="gone"
+                         android:layout_alignParentBottom="true"
+                         />
+
+</RelativeLayout>

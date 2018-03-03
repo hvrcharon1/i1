@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">infocia</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="posted">Posted:</string>
+    <string name="full_news_text">View Full News</string>
+    <string name="category_text">Categories</string>
+    <string name="loading">Loading in progress. . .</string>
+    <!-- youtube -->
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="youtube_api_key">AIzaSyAYJwy6nzCFqgr5LtihRI3YuVBb_34aprw</string>
+
+    <!-- google play url please enter as it is if capital letter then also here -->
+    <string name="play_more_apps">https://play.google.com/store/apps/developer?id=gkcrop</string>
+
+    <!-- feedback email -->
+    <string name="feedback">contact@getinfocia.com</string>
+
+    /*<!-- About -->
+    <string name="about">About infocia</string>
+    <string name="web_bio">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.\n\n
+    when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.\n\n
+    It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
+
+    <!-- Admob Banner & Interstitial Ad id -->
+    <string name="admob_publisher_id">ca-app-pub-3940256099942544/6300978111</string> <!-- Change AdMob Banner Id -->
+    <string name="admob_publisher_interstitial_id">ca-app-pub-3940256099942544/1033173712</string> <!-- Change AdMob Interstitial Id -->
+
+
+    <!-- Number of Flip News you have to display interstitial ads -->
+    <string name="number_of_news_ad">5</string>
+
+    <!-- Some Message -->
+    <string name="news_1">No Latest News</string>
+    <string name="news_2">Internet Connection Error</string>
+    <string name="news_3">No More News</string>
+
+</resources>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:autofit="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/barrel_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ff355678"
+    android:tag="normal" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:weightSum="4.0" >
+
+        <RelativeLayout
+            android:id="@+id/mainaaaaaaa"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2.0"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/screen_loading"
+                android:contentDescription="@string/app_name" />
+
+            <LinearLayout
+                android:id="@+id/barrel_headingLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/barrel_OnlyForImage"
+                android:layout_alignParentLeft="true"
+                android:background="#77000000"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:weightSum="7.0" >
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="3.0dip"
+                    android:layout_marginLeft="13.0dip"
+                    android:layout_marginRight="13.0dip"
+                    android:layout_marginTop="3.0dip"
+                    android:layout_weight="7.0"
+                    android:textColor="@color/white"
+                    android:textSize="18.0dip"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/video_link"
+                    android:layout_width="30.0dip"
+                    android:layout_height="30.0dip"
+                    android:layout_marginBottom="10.0dip"
+                    android:layout_marginRight="7.0dip"
+                    android:layout_marginTop="10.0dip"
+                    android:layout_weight="3.0"
+                    android:background="@drawable/youtube" 
+                    android:contentDescription="@string/app_name"/>
+
+                <LinearLayout
+                    android:id="@+id/barrel_shareButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/goto_link"
+                        android:layout_width="25.0dip"
+                        android:layout_height="30.0dip"
+                        android:layout_marginBottom="10.0dip"
+                        android:layout_marginRight="7.0dip"
+                        android:layout_marginTop="10.0dip"
+                        android:background="@drawable/share_icon"
+                        android:contentDescription="@string/app_name" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/barrel_OnlyForImage"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:visibility="visible" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/mainaaaaaaa1111"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="2.0"
+            android:orientation="vertical"
+            android:weightSum="15.0" >
+
+            <RelativeLayout
+                android:id="@+id/barrel_postedLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="13.5"
+                android:background="@color/white"
+                android:gravity="center_vertical" >
+
+                <TextView
+                    android:id="@+id/barrel_postedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="12.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:gravity="center_vertical"
+                    android:text="@string/posted"
+                    android:textColor="@color/text_flip"
+                    android:textSize="12.0dip" />
+
+                <TextView
+                    android:id="@+id/barrel_postedTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="12.0dip"
+                    android:layout_marginTop="5.0dip"
+                    android:layout_toRightOf="@+id/barrel_postedText"
+                    android:gravity="center_vertical"
+                    android:text=""
+                    android:textColor="@color/text_flip"
+                    android:textSize="12.0dip" />
+
+                <ImageView
+                    android:id="@+id/barrel_dash"
+                    android:layout_width="1.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="7.0dip"
+                    android:layout_marginLeft="6.0dip"
+                    android:layout_marginRight="6.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:layout_toRightOf="@+id/barrel_postedTime"
+                    android:background="#77848484"
+                    android:contentDescription="@string/app_name" />
+
+                <TextView
+                    android:id="@+id/barrel_writtenByActual"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="5.0dip"
+                    android:layout_toRightOf="@+id/barrel_dash"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/text_flip"
+                    android:textSize="12.0dip" />
+
+                <ImageView
+                    android:id="@+id/barrel_dash1"
+                    android:layout_width="1.0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="7.0dip"
+                    android:layout_marginLeft="6.0dip"
+                    android:layout_marginRight="6.0dip"
+                    android:layout_marginTop="8.0dip"
+                    android:layout_toRightOf="@+id/barrel_writtenByActual"
+                    android:background="#77848484"
+                    android:contentDescription="@string/app_name" />
+
+                <TextView
+                    android:id="@+id/view_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_marginTop="5.0dip"
+                    android:layout_toRightOf="@+id/barrel_dash1"
+                    android:gravity="center_vertical"
+                    android:text="@string/full_news_text"
+                    android:textColor="@color/text_flip"
+                    android:textSize="12.0dip" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/barrel_contentLayout"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1.5"
+                android:background="@color/white"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_marginBottom="5.0dip"
+                    android:layout_marginLeft="13.0dip"
+                    android:layout_marginRight="13.0dip"
+                    android:layout_marginTop="3.0dip"
+                    android:textColor="@color/textdesc_flip"
+                    android:textSize="17.0dip" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

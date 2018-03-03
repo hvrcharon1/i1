@@ -1,0 +1,1 @@
+include ':app', ':aphidFlipViewLibrary', ':google-play-services_lib'
