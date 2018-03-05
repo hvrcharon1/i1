@@ -113,9 +113,9 @@ public class OtherActivty extends Activity {
 
         setupSettingsItem(findViewById(R.id.item_notifications), R.drawable.ic_notifications, R.string.notifications,
                 R.drawable.ic_notifications_switch);
-        setupSettingsItem(findViewById(R.id.item_images), R.drawable.ic_image, R.string.hd_images,
+        setupSettingsItem(findViewById(R.id.item_images), R.drawable.ic_image, R.string.images,
                 R.drawable.ic_images_switch);
-        setupSettingsItem(findViewById(R.id.item_night_mode), R.drawable.ic_image, R.string.night_mode,
+        setupSettingsItem(findViewById(R.id.item_night_mode), R.drawable.ic_image, R.string.theme,
                 R.drawable.ic_images_switch);
     }
 

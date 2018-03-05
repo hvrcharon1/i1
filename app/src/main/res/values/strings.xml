@@ -40,7 +40,7 @@
     <string name="news_2">Internet Connection Error</string>
     <string name="news_3">No More News</string>
     <string name="notifications">Notifications</string>
-    <string name="hd_images">HD Images</string>
-    <string name="night_mode">Night Mode</string>
+    <string name="images">Images</string>
+    <string name="theme">Theme</string>
 
 </resources>

@@ -5,17 +5,6 @@
     android:background="@color/transparentBlack"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/lsv_other"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:cacheColorHint="#000000"></ListView>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?android:attr/listDivider" />
-
     <include
         android:id="@+id/item_notifications"
         layout="@layout/adt_settings_item" />
@@ -37,5 +26,16 @@
     <include
         android:id="@+id/item_night_mode"
         layout="@layout/adt_settings_item" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider" />
+
+    <ListView
+        android:id="@+id/lsv_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="#000000" />
 
 </LinearLayout>
