@@ -9,6 +9,7 @@ import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -25,6 +26,7 @@ public class OtherActivty extends Activity {
     int img[] = {R.drawable.about, R.drawable.moreapp, R.drawable.feedback, R.drawable.rateapp};
     String name[] = {"About Us", "Feedback", "Terms and Conditions", "Privacy Policy"};
     ListView lsv;
+    private View imageOff;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,21 +113,34 @@ public class OtherActivty extends Activity {
             }
         });
 
+        imageOff = findViewById(R.id.img_image_off);
         setupSettingsItem(findViewById(R.id.item_notifications), R.drawable.ic_notifications, R.string.notifications,
                 R.drawable.ic_notifications_switch);
         setupSettingsItem(findViewById(R.id.item_images), R.drawable.ic_image, R.string.images,
-                R.drawable.ic_images_switch);
+                R.drawable.ic_images_switch, new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                        imageOff.setVisibility(isChecked ? View.GONE : View.VISIBLE);
+                    }
+                });
         setupSettingsItem(findViewById(R.id.item_night_mode), R.drawable.ic_image, R.string.theme,
                 R.drawable.ic_images_switch);
     }
 
     private void setupSettingsItem(View itemView, @DrawableRes int iconRes, @StringRes int textRes,
                                    @DrawableRes int switchRes) {
+        setupSettingsItem(itemView, iconRes, textRes, switchRes, null);
+    }
+
+    private void setupSettingsItem(View itemView, @DrawableRes int iconRes, @StringRes int textRes,
+                                   @DrawableRes int switchRes,
+                                   CompoundButton.OnCheckedChangeListener onCheckedChangeListener) {
         ((ImageView) itemView.findViewById(R.id.ic_settings))
                 .setImageResource(iconRes);
         ((TextView) itemView.findViewById(R.id.label_settings)).setText(textRes);
         final SwitchCompat switchView = itemView.findViewById(R.id.switch_settings);
         switchView.setThumbResource(switchRes);
+        switchView.setOnCheckedChangeListener(onCheckedChangeListener);
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
