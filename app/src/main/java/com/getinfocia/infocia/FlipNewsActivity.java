@@ -366,7 +366,7 @@ public class FlipNewsActivity extends Activity {
             final Travels data = Travels.IMG_DESCRIPTIONS.get(position);
 
 			/*UI
-			.<TextView>findViewById(layout, R.id.title)
+            .<TextView>findViewById(layout, R.id.title)
 			.setText(data.title);
 
 
@@ -429,7 +429,7 @@ public class FlipNewsActivity extends Activity {
                 public void onClick(View v) {
                     // TODO Auto-generated method stub
                     String shareText = (new StringBuilder(String.valueOf("-For more news download short news App https://play.google.com/store/apps/details?id=" + getPackageName()))).append("\n\n").append(data.title.toString()).append("\n").append(data.source_link.toString()).toString();
-					/*String path=SaveBackground(homeLayout);
+                    /*String path=SaveBackground(homeLayout);
 					File imagepath=new File(path);
 					Intent share = new Intent(Intent.ACTION_SEND);
 					share.setType("image/png");
@@ -768,7 +768,7 @@ public class FlipNewsActivity extends Activity {
                     imageUrl = android.get(position).getCategoryImageurl().replace(" ", "%20");
                     Log.e("CAT_IMAGE_ADAPTER false", "" + imageUrl);
                 }
-                imageLoader.loadImage(imageUrl, viewHolder.img);
+                imageLoader.loadImageGuaranteed(imageUrl, viewHolder.img);
             }
             final int pos = position;
             viewHolder.layoutItems.setBackgroundColor((currentPage == position) ? highlightColor : Color.TRANSPARENT);

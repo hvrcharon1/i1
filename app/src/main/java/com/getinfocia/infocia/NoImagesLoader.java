@@ -21,6 +21,20 @@ public class NoImagesLoader implements ImageLoader {
         this.localSettings = localSettings;
     }
 
+    private void loadImageGuaranteed(String imageUrl, ImageView imageView, int placeHolder) {
+        RequestCreator requestCreator = picasso.load(Constant.IMAGE_PATH + imageUrl);
+        if (placeHolder > 0) {
+            requestCreator.placeholder(placeHolder);
+        }
+        requestCreator.into(imageView);
+    }
+
+
+    @Override
+    public void loadImageGuaranteed(String imageUrl, ImageView imageView) {
+        loadImageGuaranteed(imageUrl, imageView, -1);
+    }
+
     @Override
     public void loadImage(String imageUrl, ImageView imageView) {
         loadImage(imageUrl, imageView, -1);
@@ -29,11 +43,7 @@ public class NoImagesLoader implements ImageLoader {
     @Override
     public void loadImage(String imageUrl, ImageView imageView, int placeHolder) {
         if (localSettings.isImagesLoadingEnabled()) {
-            RequestCreator requestCreator = picasso.load(Constant.IMAGE_PATH + imageUrl);
-            if (placeHolder > 0) {
-                requestCreator.placeholder(placeHolder);
-            }
-            requestCreator.into(imageView);
+            loadImageGuaranteed(imageUrl, imageView, placeHolder);
         } else {
             picasso.load(R.drawable.image_off).fit().into(imageView);
         }

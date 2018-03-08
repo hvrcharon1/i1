@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 public interface ImageLoader {
 
+    void loadImageGuaranteed(String imageUrl, ImageView imageView);
+
     void loadImage(String imageUrl, ImageView imageView);
 
     void loadImage(String imageUrl, ImageView imageView, @DrawableRes int placeHolder);
