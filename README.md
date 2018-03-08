@@ -1,2 +1,1 @@
-Infocia
-All rights reserved. ©copyright 2018
+Infocia | © 2018 by infocia app | All Rights Reserved 
