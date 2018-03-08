@@ -39,11 +39,4 @@
         android:layout_weight="1"
         android:cacheColorHint="#000000" />
 
-    <ImageView
-        android:id="@+id/img_image_off"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:src="@drawable/image_off" />
-
 </LinearLayout>

@@ -20,12 +20,13 @@
 
 
     <application
-        tools:replace="android:icon"
+        android:name=".InfociaApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -35,24 +36,19 @@
         </activity>
         <activity
             android:name=".FlipNewsActivity"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".WebNews"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".OtherActivty"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".push.PushNews"
-            android:screenOrientation="portrait" >
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".yt.YoutubePlay"
-            android:configChanges="orientation|keyboardHidden|screenSize" >
-        </activity>
+            android:configChanges="orientation|keyboardHidden|screenSize"></activity>
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -67,7 +63,7 @@
 
         <receiver
             android:name=".push.CustomPushReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -78,7 +74,7 @@
         </receiver>
         <receiver
             android:name="com.parse.GcmBroadcastReceiver"
-            android:permission="com.google.android.c2dm.permission.SEND" >
+            android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.android.c2dm.intent.RECEIVE" />
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
@@ -87,8 +83,6 @@
                 <category android:name="com.jrm.shortnews" />
             </intent-filter>
         </receiver>
-
-
 
 
     </application>
