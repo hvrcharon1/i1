@@ -378,7 +378,7 @@ public class FlipNewsActivity extends Activity {
 
             UI
                     .<TextView>findViewById(layout, R.id.barrel_postedTime)
-                    .setText(Html.fromHtml(data.postdate));
+                    .setText(String.format(getString(R.string.posted), Html.fromHtml(data.postdate)));
 
             UI
                     .<TextView>findViewById(layout, R.id.barrel_writtenByActual)
@@ -430,7 +430,7 @@ public class FlipNewsActivity extends Activity {
                     // TODO Auto-generated method stub
                     String shareText = (new StringBuilder(String.valueOf("-For more news download short news App https://play.google.com/store/apps/details?id=" + getPackageName()))).append("\n\n").append(data.title.toString()).append("\n").append(data.source_link.toString()).toString();
                     /*String path=SaveBackground(homeLayout);
-					File imagepath=new File(path);
+                    File imagepath=new File(path);
 					Intent share = new Intent(Intent.ACTION_SEND);
 					share.setType("image/png");
 					share.putExtra(Intent.EXTRA_TEXT, shareText);

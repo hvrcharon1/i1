@@ -67,7 +67,7 @@ public class PushNews extends Activity {
 
         txtTitle.setText(Title);
         txtDesc.setText(Html.fromHtml(Desc).toString().replaceAll("'", "''"));
-        txtPostdate.setText(Date);
+        txtPostdate.setText(String.format(getString(R.string.posted), Date));
         txtsource.setText(SourceTitle);
 
         imageLoader.loadImage(Image, imgPhotoview);

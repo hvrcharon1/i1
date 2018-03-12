@@ -7,7 +7,7 @@
     <string name="action_settings">Settings</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="posted">Posted:</string>
+    <string name="posted">Posted: %s</string>
     <string name="full_news_text">View Full News</string>
     <string name="category_text">Categories</string>
     <string name="loading">Loading in progress. . .</string>
