@@ -7,13 +7,16 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.text.Html;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.getinfocia.infocia.ImageLoader;
+import com.getinfocia.infocia.InfociaApp;
 import com.getinfocia.infocia.R;
 import com.getinfocia.infocia.WebNews;
 import com.getinfocia.infocia.yt.YoutubePlay;
@@ -33,7 +36,7 @@ public class PushNews extends Activity {
     TextView txtTitle, txtDesc, txtPostdate, txtsource, txtmore;
     String Title, Desc, Image, Date, SourceTitle, SLink, VideoId;
     StringBuilder sb;
-    RelativeLayout homeLayout;
+    View homeLayout;
     @Inject
     ImageLoader imageLoader;
 
@@ -41,13 +44,17 @@ public class PushNews extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_barrel);
+        InfociaApp.getInstance().getMainComponent().inject(this);
+        setContentView(R.layout.view_news_common);
+        ViewGroup descriptionContainer = findViewById(R.id.container_description);
+        descriptionContainer.addView(LayoutInflater.from(this)
+                .inflate(R.layout.view_full_news_descriptions, descriptionContainer, false));
         sb = new StringBuilder();
         sb.append(Environment.getExternalStorageDirectory().toString()).append(File.separator).append(getString(R.string.app_name));
         imgPhotoview = (ImageView) findViewById(R.id.photo);
         imgshare = (ImageView) findViewById(R.id.goto_link);
         imgYt = (ImageView) findViewById(R.id.video_link);
-        homeLayout = (RelativeLayout) findViewById(R.id.barrel_layout);
+        homeLayout = findViewById(R.id.barrel_layout);
         txtTitle = (TextView) findViewById(R.id.title);
         txtDesc = (TextView) findViewById(R.id.description);
         txtPostdate = (TextView) findViewById(R.id.barrel_postedTime);
@@ -118,7 +125,7 @@ public class PushNews extends Activity {
         });
     }
 
-    public String SaveBackground(RelativeLayout panelResult1) {
+    public String SaveBackground(View panelResult1) {
         View panelResult = panelResult1.getRootView();
         Bitmap bitmap;
         panelResult.invalidate();

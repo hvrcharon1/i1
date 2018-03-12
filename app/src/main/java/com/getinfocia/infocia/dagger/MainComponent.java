@@ -1,7 +1,7 @@
 package com.getinfocia.infocia.dagger;
 
 import com.getinfocia.infocia.FlipNewsActivity;
-import com.getinfocia.infocia.adapter.DataAdapter;
+import com.getinfocia.infocia.NewsFullActivity;
 import com.getinfocia.infocia.push.PushNews;
 
 import javax.inject.Singleton;
@@ -18,4 +18,6 @@ public interface MainComponent {
     void inject(FlipNewsActivity activity);
 
     void inject(PushNews activity);
+
+    void inject(NewsFullActivity activity);
 }

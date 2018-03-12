@@ -49,6 +49,9 @@
         <activity
             android:name=".yt.YoutubePlay"
             android:configChanges="orientation|keyboardHidden|screenSize"></activity>
+        <activity
+            android:name=".NewsFullActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="com.google.android.gms.version"

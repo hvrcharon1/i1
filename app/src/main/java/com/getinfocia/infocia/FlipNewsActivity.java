@@ -17,28 +17,28 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Html;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.LinearInterpolator;
 import android.view.animation.RotateAnimation;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.aphidmobile.utils.UI;
+import com.getinfocia.infocia.adapter.NewsBinder;
 import com.getinfocia.infocia.db.DatabaseHelper;
 import com.getinfocia.infocia.item.ItemCategory;
 import com.getinfocia.infocia.item.Travels;
 import com.getinfocia.infocia.util.Constant;
 import com.getinfocia.infocia.util.JsonUtils;
-import com.getinfocia.infocia.yt.YoutubePlay;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -109,7 +109,7 @@ public class FlipNewsActivity extends Activity {
         mainCategory = (ImageView) findViewById(R.id.language_change);
         Travels.IMG_DESCRIPTIONS.clear();
         arrayOfAllcategory = new ArrayList<ItemCategory>();
-        Bundle i = getIntent().getExtras();
+        final Bundle i = getIntent().getExtras();
         if (i == null) {
             showData("all");
             selected_category = "0";
@@ -167,7 +167,7 @@ public class FlipNewsActivity extends Activity {
 
             @Override
             public void onCardClicked(int index) {
-
+                openNewsFull(Travels.IMG_DESCRIPTIONS.get(index));
             }
         });
 
@@ -314,6 +314,10 @@ public class FlipNewsActivity extends Activity {
 
     }
 
+    private void openNewsFull(Travels travels) {
+        startActivity(NewsFullActivity.buildIntent(this, travels));
+    }
+
 
     private void showData(String Name) {
         Cursor cursor = dbHelper.getAllNewsByCategory(Name);
@@ -333,12 +337,12 @@ public class FlipNewsActivity extends Activity {
         private Context context;
         private LayoutInflater inflater;
         RelativeLayout homeLayout;
+        private NewsBinder newsBinder;
 
         private MyBaseAdapter(Context context) {
             inflater = LayoutInflater.from(context);
             this.context = context;
-
-
+            newsBinder = new NewsBinder(context, font, imageLoader);
         }
 
         @Override
@@ -360,104 +364,26 @@ public class FlipNewsActivity extends Activity {
         public View getView(int position, View convertView, ViewGroup parent) {
             View layout = convertView;
             if (convertView == null) {
-                layout = inflater.inflate(R.layout.fragment_barrel, parent, false);
+                layout = inflater.inflate(R.layout.view_news_common, parent, false);
+                ViewGroup descriptionContainer = layout.findViewById(R.id.container_description);
+                descriptionContainer.addView(LayoutInflater.from(context)
+                        .inflate(R.layout.view_card_news_descriptions, descriptionContainer, false));
             }
+            //added ellipsize in the end
+            final TextView tvDesc = layout.findViewById(R.id.description);
+            tvDesc.getViewTreeObserver()
+                    .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                        @Override
+                        public void onGlobalLayout() {
+                            tvDesc.getViewTreeObserver().removeGlobalOnLayoutListener(this);
+                            int noOfLinesVisible = tvDesc.getHeight() / tvDesc.getLineHeight();
+                            tvDesc.setMaxLines(noOfLinesVisible);
+                            tvDesc.setEllipsize(TextUtils.TruncateAt.END);
 
+                        }
+                    });
             final Travels data = Travels.IMG_DESCRIPTIONS.get(position);
-
-			/*UI
-            .<TextView>findViewById(layout, R.id.title)
-			.setText(data.title);
-
-
-			UI
-			.<TextView>findViewById(layout, R.id.description)
-			.setText(Html.fromHtml(data.description));
-
-			*/
-
-            UI
-                    .<TextView>findViewById(layout, R.id.barrel_postedTime)
-                    .setText(String.format(getString(R.string.posted), Html.fromHtml(data.postdate)));
-
-            UI
-                    .<TextView>findViewById(layout, R.id.barrel_writtenByActual)
-                    .setText(Html.fromHtml(data.source_title));
-
-            ImageView photoView = UI.findViewById(layout, R.id.photo);
-            ImageView youtube = UI.findViewById(layout, R.id.video_link);
-            ImageView share = UI.findViewById(layout, R.id.goto_link);
-            TextView more = UI.findViewById(layout, R.id.view_more);
-            TextView title = (TextView) UI.findViewById(layout, R.id.title);
-            TextView description = (TextView) UI.findViewById(layout, R.id.description);
-            description.setTypeface(font);
-            description.setText(Html.fromHtml(data.description));
-            title.setTypeface(font);
-            title.setText(data.title);
-
-            photoView.setScaleType(ScaleType.FIT_XY);
-
-            imageLoader.loadImage(data.imgurl.replace(" ", "%20"), photoView,
-                    R.drawable.screen_loading);
-
-
-            homeLayout = UI.findViewById(layout, R.id.barrel_layout);
-
-
-            if (data.video_id.equals("") || data.video_id.equals("null")) {
-                youtube.setVisibility(View.GONE);
-            } else {
-                youtube.setVisibility(View.VISIBLE);
-            }
-
-            youtube.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-
-                    Intent yt = new Intent(FlipNewsActivity.this, YoutubePlay.class);
-                    yt.putExtra("id", JsonUtils.getVideoId(data.video_id));
-                    startActivity(yt);
-                }
-            });
-
-
-            share.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    String shareText = (new StringBuilder(String.valueOf("-For more news download short news App https://play.google.com/store/apps/details?id=" + getPackageName()))).append("\n\n").append(data.title.toString()).append("\n").append(data.source_link.toString()).toString();
-                    /*String path=SaveBackground(homeLayout);
-                    File imagepath=new File(path);
-					Intent share = new Intent(Intent.ACTION_SEND);
-					share.setType("image/png");
-					share.putExtra(Intent.EXTRA_TEXT, shareText);
-					share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imagepath));
-					startActivity(Intent.createChooser(share, "Share Image"));*/
-
-                    Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                    sharingIntent.setType("text/plain");
-                    //sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-                    sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
-                    startActivity(Intent.createChooser(sharingIntent, "Share"));
-                }
-            });
-
-
-            more.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // TODO Auto-generated method stub
-                    Intent intmore = new Intent(FlipNewsActivity.this, WebNews.class);
-                    intmore.putExtra("link", data.source_link);
-                    startActivity(intmore);
-                }
-            });
-
-
+            newsBinder.bindNews(data, layout);
             return layout;
         }
     }
@@ -608,8 +534,8 @@ public class FlipNewsActivity extends Activity {
 
     public void setAdapterListview() {
         // TODO Auto-generated method stub
-		/*adapter=new CategoryAdapter(FlipNewsActivity.this, R.layout.category_lsv_item, arrayOfAllcategory);
-		lsv_category.setAdapter(adapter);
+        /*adapter=new CategoryAdapter(FlipNewsActivity.this, R.layout.category_lsv_item, arrayOfAllcategory);
+        lsv_category.setAdapter(adapter);
 		adapter.setCurrentPage(Integer.parseInt(selected_category));*/
         adapter = new DataAdapter(getApplicationContext(), arrayOfAllcategory);
         recyclerView.setAdapter(adapter);
@@ -852,8 +778,8 @@ public class FlipNewsActivity extends Activity {
                                     rateAppIntent, 0).size() > 0) {
                                 startActivity(rateAppIntent);
                             } else {
-							/*
-							 * handle your error case: the device has no way to
+                            /*
+                             * handle your error case: the device has no way to
 							 * handle market urls
 							 */
                             }
