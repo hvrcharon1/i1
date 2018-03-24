@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -39,6 +40,7 @@ import com.getinfocia.infocia.item.ItemCategory;
 import com.getinfocia.infocia.item.Travels;
 import com.getinfocia.infocia.util.Constant;
 import com.getinfocia.infocia.util.JsonUtils;
+import com.getinfocia.infocia.util.ShareHelper;
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -82,6 +84,8 @@ public class FlipNewsActivity extends Activity {
     boolean isDrawerOpened = false;
     @Inject
     ImageLoader imageLoader;
+    @Inject
+    ShareHelper shareHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,6 +111,7 @@ public class FlipNewsActivity extends Activity {
         mainGoToFirst = (ImageView) findViewById(R.id.main_GoToFirst);
         mainRefresh = (ImageView) findViewById(R.id.main_Refresh);
         mainCategory = (ImageView) findViewById(R.id.language_change);
+        final View mainView = findViewById(R.id.main_flipView_layout);
         Travels.IMG_DESCRIPTIONS.clear();
         arrayOfAllcategory = new ArrayList<ItemCategory>();
         final Bundle i = getIntent().getExtras();
@@ -223,7 +228,7 @@ public class FlipNewsActivity extends Activity {
                     mainRefresh.clearAnimation();
                     Toast.makeText(FlipNewsActivity.this, getResources().getString(R.string.news_2), Toast.LENGTH_SHORT).show();
                 }
-
+                Snackbar.make(mainView, R.string.page_refreshed, Snackbar.LENGTH_LONG).show();
             }
         });
 
@@ -342,7 +347,7 @@ public class FlipNewsActivity extends Activity {
         private MyBaseAdapter(Context context) {
             inflater = LayoutInflater.from(context);
             this.context = context;
-            newsBinder = new NewsBinder(context, font, imageLoader);
+            newsBinder = new NewsBinder(context, imageLoader, shareHelper);
         }
 
         @Override

@@ -1,8 +1,9 @@
 package com.getinfocia.infocia.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
+import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.getinfocia.infocia.R;
 import com.getinfocia.infocia.WebNews;
 import com.getinfocia.infocia.item.Travels;
 import com.getinfocia.infocia.util.JsonUtils;
+import com.getinfocia.infocia.util.ShareHelper;
 import com.getinfocia.infocia.yt.YoutubePlay;
 
 /**
@@ -28,17 +30,18 @@ public class NewsBinder {
 
     private Context context;
 
-    private Typeface font;
-
     private ImageLoader imageLoader;
 
-    public NewsBinder(@NonNull Context context, @NonNull Typeface font, @NonNull ImageLoader imageLoader) {
+    private ShareHelper shareHelper;
+
+    public NewsBinder(@NonNull Context context, @NonNull ImageLoader imageLoader,
+                      @NonNull ShareHelper shareHelper) {
         this.context = context;
-        this.font = font;
         this.imageLoader = imageLoader;
+        this.shareHelper = shareHelper;
     }
 
-    public void bindNews(final Travels data, View layout) {
+    public void bindNews(final Travels data, final View layout) {
         UI
                 .<TextView>findViewById(layout, R.id.barrel_postedTime)
                 .setText(String.format(context.getString(R.string.posted), Html.fromHtml(data.postdate)));
@@ -53,10 +56,8 @@ public class NewsBinder {
         TextView more = UI.findViewById(layout, R.id.view_more);
         TextView title = (TextView) UI.findViewById(layout, R.id.title);
         TextView description = (TextView) UI.findViewById(layout, R.id.description);
-        description.setTypeface(font);
         description.setText(Html.fromHtml(data.description));
-        title.setTypeface(font);
-        title.setText(data.title);
+        title.setText(data.title.replaceAll("’", "’’"));
 
         photoView.setScaleType(ImageView.ScaleType.FIT_XY);
 
@@ -87,21 +88,24 @@ public class NewsBinder {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
-                String shareText = (new StringBuilder(String.valueOf("-For more news download short news App https://play.google.com/store/apps/details?id=" + context.getPackageName()))).append("\n\n").append(data.title.toString()).append("\n").append(data.source_link.toString()).toString();
-                    /*String path=SaveBackground(homeLayout);
-                    File imagepath=new File(path);
-					Intent share = new Intent(Intent.ACTION_SEND);
-					share.setType("image/png");
-					share.putExtra(Intent.EXTRA_TEXT, shareText);
-					share.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(imagepath));
-					startActivity(Intent.createChooser(share, "Share Image"));*/
-
-                Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-                sharingIntent.setType("text/plain");
-                //sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Subject Here");
-                sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareText);
-                context.startActivity(Intent.createChooser(sharingIntent, "Share"));
+                final String shareText = new StringBuilder(context.getString(R.string.sharing_text))
+                        .append(context.getPackageName())
+                        .append("\n\n")
+                        .append(data.title.toString())
+                        .append("\n")
+                        .append(data.source_link.toString())
+                        .toString();
+                final Bitmap shareBitmap = shareHelper.getBitmapFromView(
+                        ((Activity) context).getWindow().getDecorView().findViewById(android.R.id.content));
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        shareHelper.saveBitmapToCacheFile(shareBitmap);
+                        Intent intent = shareHelper.buildShareImageIntent(shareHelper.getCacheFileUri(),
+                                null, shareText, context.getString(R.string.shate_title));
+                        context.startActivity(intent);
+                    }
+                }).start();
             }
         });
 

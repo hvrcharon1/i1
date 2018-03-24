@@ -42,5 +42,8 @@
     <string name="notifications">Notifications</string>
     <string name="images">Images</string>
     <string name="theme">Theme</string>
+    <string name="page_refreshed">Page Refreshed</string>
+    <string name="shate_title">Share</string>
+    <string name="sharing_text">-For more news download short news App https://play.google.com/store/apps/details?id=</string>
 
 </resources>

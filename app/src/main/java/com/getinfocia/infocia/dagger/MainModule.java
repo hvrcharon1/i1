@@ -5,6 +5,7 @@ import android.content.Context;
 import com.getinfocia.infocia.ImageLoader;
 import com.getinfocia.infocia.LocalSettings;
 import com.getinfocia.infocia.NoImagesLoader;
+import com.getinfocia.infocia.util.ShareHelper;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Singleton;
@@ -40,5 +41,10 @@ public class MainModule {
     @Singleton
     ImageLoader provideImageLoader(Picasso picasso, LocalSettings localSettings) {
         return new NoImagesLoader(picasso, localSettings);
+    }
+
+    @Provides
+    ShareHelper provideShareHelper() {
+        return new ShareHelper(context);
     }
 }

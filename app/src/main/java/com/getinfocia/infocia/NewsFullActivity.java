@@ -2,7 +2,6 @@ package com.getinfocia.infocia;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.getinfocia.infocia.adapter.NewsBinder;
 import com.getinfocia.infocia.item.Travels;
+import com.getinfocia.infocia.util.ShareHelper;
 
 import javax.inject.Inject;
 
@@ -28,6 +28,9 @@ public class NewsFullActivity extends AppCompatActivity {
     @Inject
     ImageLoader imageLoader;
 
+    @Inject
+    ShareHelper shareHelper;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +39,7 @@ public class NewsFullActivity extends AppCompatActivity {
         ViewGroup descriptionContainer = findViewById(R.id.container_description);
         descriptionContainer.addView(LayoutInflater.from(this)
                 .inflate(R.layout.view_full_news_descriptions, descriptionContainer, false));
-        NewsBinder newsBinder = new NewsBinder(this,
-                Typeface.createFromAsset(getAssets(), "RobotoLight.ttf"), imageLoader);
+        NewsBinder newsBinder = new NewsBinder(this, imageLoader, shareHelper);
         newsBinder.bindNews((Travels) getIntent().getSerializableExtra(EXTRA_TRAVELS),
                 getWindow().getDecorView());
     }
