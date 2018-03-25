@@ -71,7 +71,7 @@ public class PushNews extends Activity {
         SLink = I.getStringExtra("slink");
         VideoId = I.getStringExtra("videoid");
 
-
+        txtTitle.setText(Title);
         txtDesc.setText(Html.fromHtml(Desc).toString().replaceAll("'", "''"));
         txtPostdate.setText(String.format(getString(R.string.posted), Date));
         txtsource.setText(SourceTitle);

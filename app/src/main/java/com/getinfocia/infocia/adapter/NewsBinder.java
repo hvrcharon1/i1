@@ -59,7 +59,7 @@ public class NewsBinder {
         TextView description = (TextView) UI.findViewById(layout, R.id.description);
         description.setText(Html.fromHtml(data.description));
         description.setTypeface(Typeface.createFromAsset(context.getAssets(), "RobotoLight.ttf"));
-
+        title.setText(data.title);
         photoView.setScaleType(ImageView.ScaleType.FIT_XY);
 
         imageLoader.loadImage(data.imgurl.replace(" ", "%20"), photoView,
