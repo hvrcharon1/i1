@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.text.Html;
 import android.view.View;
@@ -57,7 +58,7 @@ public class NewsBinder {
         TextView title = (TextView) UI.findViewById(layout, R.id.title);
         TextView description = (TextView) UI.findViewById(layout, R.id.description);
         description.setText(Html.fromHtml(data.description));
-        title.setText(data.title.replaceAll("’", "’’"));
+        description.setTypeface(Typeface.createFromAsset(context.getAssets(), "RobotoLight.ttf"));
 
         photoView.setScaleType(ImageView.ScaleType.FIT_XY);
 

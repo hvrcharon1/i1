@@ -72,7 +72,6 @@ public class PushNews extends Activity {
         VideoId = I.getStringExtra("videoid");
 
 
-        txtTitle.setText(Title.replaceAll("’", "’’"));
         txtDesc.setText(Html.fromHtml(Desc).toString().replaceAll("'", "''"));
         txtPostdate.setText(String.format(getString(R.string.posted), Date));
         txtsource.setText(SourceTitle);
